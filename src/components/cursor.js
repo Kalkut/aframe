@@ -176,14 +176,22 @@ module.exports.Component = registerComponent('cursor', {
       direction: direction
     };
     return function (evt) {
+      var point;
       var camera = this.el.sceneEl.camera;
       camera.parent.updateMatrixWorld();
       camera.updateMatrixWorld();
 
+      if (evt.type === 'touchmove' || evt.type === 'touchstart') {
+        // Track the first touch for simplicity.
+        point = evt.touches[0];
+      } else {
+        point = evt;
+      }
+
       // Calculate mouse position based on the canvas element
       var bounds = this.canvasBounds;
-      var left = evt.clientX - bounds.left;
-      var top = evt.clientY - bounds.top;
+      var left = point.clientX - bounds.left;
+      var top = point.clientY - bounds.top;
       mouse.x = (left / bounds.width) * 2 - 1;
       mouse.y = -(top / bounds.height) * 2 + 1;
 

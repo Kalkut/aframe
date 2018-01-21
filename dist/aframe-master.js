@@ -66639,14 +66639,22 @@ module.exports.Component = registerComponent('cursor', {
       direction: direction
     };
     return function (evt) {
+      var point;
       var camera = this.el.sceneEl.camera;
       camera.parent.updateMatrixWorld();
       camera.updateMatrixWorld();
 
+      if (evt.type === 'touchmove' || evt.type === 'touchstart') {
+        // Track the first touch for simplicity.
+        point = evt.touches[0];
+      } else {
+        point = evt;
+      }
+
       // Calculate mouse position based on the canvas element
       var bounds = this.canvasBounds;
-      var left = evt.clientX - bounds.left;
-      var top = evt.clientY - bounds.top;
+      var left = point.clientX - bounds.left;
+      var top = point.clientY - bounds.top;
       mouse.x = (left / bounds.width) * 2 - 1;
       mouse.y = -(top / bounds.height) * 2 + 1;
 
@@ -78409,7 +78417,7 @@ _dereq_('./core/a-mixin');
 _dereq_('./extras/components/');
 _dereq_('./extras/primitives/');
 
-console.log('A-Frame Version: 0.7.1 (Date 21-01-2018, Commit #05dc47df)');
+console.log('A-Frame Version: 0.7.1 (Date 21-01-2018, Commit #58a52ba7)');
 console.log('three Version:', pkg.dependencies['three']);
 console.log('WebVR Polyfill Version:', pkg.dependencies['webvr-polyfill']);
 
