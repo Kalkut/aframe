@@ -68214,7 +68214,7 @@ module.exports.Component = registerComponent('line', {
   },
 
   remove: function () {
-    this.el.removeObject3D('line', this.line);
+    this.el.removeObject3D(this.attrName, this.line);
   }
 });
 
@@ -78417,7 +78417,7 @@ _dereq_('./core/a-mixin');
 _dereq_('./extras/components/');
 _dereq_('./extras/primitives/');
 
-console.log('A-Frame Version: 0.7.1 (Date 21-01-2018, Commit #58a52ba7)');
+console.log('A-Frame Version: 0.7.1 (Date 02-02-2018, Commit #50775b85)');
 console.log('three Version:', pkg.dependencies['three']);
 console.log('WebVR Polyfill Version:', pkg.dependencies['webvr-polyfill']);
 
